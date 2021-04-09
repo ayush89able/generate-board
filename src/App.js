@@ -19,6 +19,8 @@ const styles = makeStyles((theme) => ({
     color: "white"
   },
   table: {
+    margin: "0 auto",
+    marginTop: "5em",
     display: "table"
   },
   cell: {
@@ -44,19 +46,24 @@ function App() {
   }, [load]) 
 
   const gernerateBoard = () => {
-    let midArray = wordList.map((item, index) => {
+    let slicedArray = wordList.slice(0,16)
+    let midArray = slicedArray.map((item, index) => {
       let z = {
         val: item
       };
-      if (index % 3 === 0) {
-        z.color = "default";
-      } else if (index % 3 === 1) {
+      if (index % 14 === 0 && index!==0) {
+        z.color = "disabled";
+      } else if (index % 3 === 0) {
         z.color = "primary";
-      } else if (index % 3 === 2) {
+      } else if (index % 3 === 1) {
         z.color = "secondary";
+      }
+      else if (index % 3 === 2) {
+        z.color = "default";
       }
       return z;
     });
+    shuffle(midArray)
     alteredlist = [];
     for (let index = 0; index < midArray.length; index += 4) {
       let myChunk = midArray.slice(index, index + 4);
@@ -75,7 +82,6 @@ function App() {
       array[randomIndex] = temporaryValue;
     }
     return array;
-    console.log({array})
   };
 
   const getCols = (chunk) => {
@@ -84,6 +90,7 @@ function App() {
       cols.push(
         <div className={classes.cell}>
           <Button
+            disabled={chunk[i].color === 'disabled' ? true : false}
             color={chunk[i].color}
             variant="contained"
             className={classes.gridItem}
@@ -99,7 +106,7 @@ function App() {
   const getRows = () => {
     gernerateBoard();
     const r = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i < 4; i++) {
       r.push(getCols(alteredlist[i]));
     }
     return r;
