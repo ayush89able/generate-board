@@ -21,20 +21,6 @@ const styles = makeStyles((theme) => ({
   marginTop: {
     marginTop: "5em"
   }
-  // table: {
-  //   margin: "0 auto",
-  //   marginTop: "5em",
-  //   display: "table"
-  // },
-  // cell: {
-  //   display: "table-cell",
-  //   borderWidth: "thin",
-  //   marginLeft: "10px",
-  //   marginRight: "10px"
-  // },
-  // row: {
-  //   display: "table-row"
-  // },
 }));
 
 function App() {
@@ -91,7 +77,6 @@ function App() {
     const cols = [];
     for (let i = 0; i < 4; i++) {
       cols.push(
-        // <div className={classes.cell}>
         <Grid item xs={3}>
           <Button
             disabled={chunk[i].color === 'disabled' ? true : false}
@@ -102,15 +87,12 @@ function App() {
             {chunk[i].val}
           </Button>
           </Grid>
-        // </div>
       );
     }
     return (
-    // <div className={classes.row}>
       <Grid container item xs={12} spacing={3} >
         {cols}
       </Grid>
-    // </div>
     )
   };
 
@@ -139,7 +121,6 @@ function App() {
           Generate Board
         </Button>
       </div>
-      {/* <div className={classes.table}> */}
       <div className={classes.marginTop}>
         {getRows()}
       </div>
